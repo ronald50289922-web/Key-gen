@@ -6,21 +6,26 @@
     <title>DVR PROXY - Gerador de Keys</title>
     <style>
         /* ========================================
-           TEMA VERMELHO NEON - DVR PROXY
+           TEMA PRETO E VERMELHO - DVR LICENSE SYSTEM
         ======================================== */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
         :root {
-            --neon-primary: #ff0040;
-            --neon-secondary: #ff1a1a;
-            --neon-light: #ff4d4d;
-            --neon-glow: rgba(255, 0, 64, 0.6);
-            --bg-dark: #0d0d0d;
-            --bg-card: #1a1a1a;
-            --bg-input: #2a2a2a;
-            --border-color: #333;
-            --text-primary: #f0f0f0;
-            --text-secondary: #aaa;
-            --success: #00ff88;
-            --error: #ff4444;
+            --red-primary: #dc2626;
+            --red-dark: #991b1b;
+            --red-light: #ef4444;
+            --red-glow: rgba(220, 38, 38, 0.3);
+            --bg-primary: #000000;
+            --bg-secondary: #0a0a0a;
+            --bg-card: #111111;
+            --bg-input: #1a1a1a;
+            --border-color: #262626;
+            --border-red: rgba(220, 38, 38, 0.3);
+            --text-primary: #ffffff;
+            --text-secondary: #a3a3a3;
+            --text-muted: #737373;
+            --success: #22c55e;
+            --error: #ef4444;
         }
 
         * {
@@ -30,8 +35,8 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--bg-dark);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--bg-primary);
             color: var(--text-primary);
             min-height: 100vh;
             display: flex;
@@ -42,8 +47,12 @@
 
         .app-container {
             width: 100%;
-            max-width: 900px;
+            max-width: 480px;
             margin: 0 auto;
+        }
+
+        .app-container.wide {
+            max-width: 900px;
         }
 
         /* Telas (SPA) */
@@ -57,97 +66,124 @@
         /* Header / Logo */
         .header {
             text-align: center;
-            margin-bottom: 30px;
+            margin-bottom: 40px;
+            padding-top: 40px;
         }
         .header h1 {
-            font-size: 2.5em;
-            color: var(--neon-primary);
-            text-shadow: 0 0 10px var(--neon-glow), 0 0 20px var(--neon-glow), 0 0 40px var(--neon-glow);
-            letter-spacing: 3px;
+            font-size: 3em;
+            font-weight: 800;
+            color: var(--red-primary);
+            letter-spacing: 6px;
+            margin-bottom: 5px;
         }
-        .header p {
+        .header .subtitle {
+            font-size: 0.75em;
+            font-weight: 600;
             color: var(--text-secondary);
-            margin-top: 5px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+        }
+        .header p.desc {
+            color: var(--text-muted);
+            margin-top: 12px;
+            font-size: 0.9em;
         }
 
         /* Cards */
         .card {
             background-color: var(--bg-card);
             border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 25px;
+            border-radius: 16px;
+            padding: 28px;
             margin-bottom: 20px;
-            box-shadow: 0 0 15px rgba(255, 0, 64, 0.1);
         }
         .card h2 {
-            color: var(--neon-secondary);
-            text-shadow: 0 0 5px var(--neon-glow);
-            margin-bottom: 15px;
-            font-size: 1.3em;
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 10px;
+            color: var(--text-primary);
+            margin-bottom: 20px;
+            font-size: 1.1em;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
-        .card h3 {
-            color: var(--neon-light);
-            margin-bottom: 10px;
+        .card h2::before {
+            content: '';
+            width: 3px;
+            height: 18px;
+            background-color: var(--red-primary);
+            border-radius: 2px;
         }
 
         /* Formulários */
         .form-group {
-            margin-bottom: 15px;
+            margin-bottom: 16px;
         }
         .form-group label {
             display: block;
-            margin-bottom: 5px;
+            margin-bottom: 6px;
             color: var(--text-secondary);
-            font-size: 0.9em;
+            font-size: 0.85em;
+            font-weight: 500;
         }
-        .form-group input {
+        .form-group input, .form-group select {
             width: 100%;
-            padding: 12px 15px;
+            padding: 14px 16px;
             background-color: var(--bg-input);
             border: 1px solid var(--border-color);
-            border-radius: 8px;
+            border-radius: 10px;
             color: var(--text-primary);
-            font-size: 1em;
-            transition: border-color 0.3s, box-shadow 0.3s;
+            font-size: 0.95em;
+            font-family: inherit;
+            transition: border-color 0.2s, box-shadow 0.2s;
         }
-        .form-group input:focus {
+        .form-group input:focus, .form-group select:focus {
             outline: none;
-            border-color: var(--neon-primary);
-            box-shadow: 0 0 8px var(--neon-glow);
+            border-color: var(--red-primary);
+            box-shadow: 0 0 0 3px var(--red-glow);
+        }
+        .form-group input::placeholder {
+            color: var(--text-muted);
         }
 
         /* Botões */
         .btn {
-            padding: 12px 24px;
+            padding: 14px 28px;
             border: none;
-            border-radius: 8px;
-            font-size: 1em;
-            font-weight: bold;
+            border-radius: 10px;
+            font-size: 0.95em;
+            font-weight: 600;
+            font-family: inherit;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.2s ease;
         }
         .btn-primary {
-            background-color: var(--neon-primary);
+            background-color: var(--red-primary);
             color: white;
-            box-shadow: 0 0 10px var(--neon-glow);
         }
         .btn-primary:hover {
-            background-color: var(--neon-secondary);
-            box-shadow: 0 0 20px var(--neon-glow), 0 0 40px var(--neon-glow);
-            transform: translateY(-2px);
+            background-color: var(--red-light);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px var(--red-glow);
+        }
+        .btn-danger {
+            background-color: transparent;
+            color: var(--red-light);
+            border: 1px solid var(--red-light);
+        }
+        .btn-danger:hover {
+            background-color: var(--red-primary);
+            color: white;
         }
         .btn-logout {
             background-color: transparent;
-            color: var(--neon-light);
-            border: 1px solid var(--neon-light);
+            color: var(--text-secondary);
+            border: 1px solid var(--border-color);
             padding: 8px 16px;
-            font-size: 0.85em;
+            font-size: 0.8em;
         }
         .btn-logout:hover {
-            background-color: var(--neon-primary);
-            color: white;
+            border-color: var(--red-primary);
+            color: var(--red-light);
         }
         .btn-block {
             width: 100%;
@@ -155,50 +191,50 @@
 
         /* Mensagens de feedback */
         .msg {
-            padding: 10px 15px;
-            border-radius: 8px;
-            margin-top: 10px;
-            font-size: 0.9em;
+            padding: 12px 16px;
+            border-radius: 10px;
+            margin-top: 12px;
+            font-size: 0.85em;
             display: none;
         }
         .msg.show {
             display: block;
         }
         .msg-success {
-            background-color: rgba(0, 255, 136, 0.1);
-            border: 1px solid var(--success);
+            background-color: rgba(34, 197, 94, 0.1);
+            border: 1px solid rgba(34, 197, 94, 0.3);
             color: var(--success);
         }
         .msg-error {
-            background-color: rgba(255, 68, 68, 0.1);
-            border: 1px solid var(--error);
+            background-color: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.3);
             color: var(--error);
         }
 
         /* Dashboard Stats */
         .stats-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
-            margin-bottom: 20px;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-bottom: 5px;
         }
         .stat-box {
             background-color: var(--bg-input);
             border: 1px solid var(--border-color);
-            border-radius: 10px;
-            padding: 20px;
+            border-radius: 12px;
+            padding: 18px 12px;
             text-align: center;
         }
         .stat-box .stat-number {
-            font-size: 2em;
-            font-weight: bold;
-            color: var(--neon-primary);
-            text-shadow: 0 0 10px var(--neon-glow);
+            font-size: 1.8em;
+            font-weight: 700;
+            color: var(--red-primary);
         }
         .stat-box .stat-label {
-            color: var(--text-secondary);
-            font-size: 0.85em;
-            margin-top: 5px;
+            color: var(--text-muted);
+            font-size: 0.7em;
+            margin-top: 4px;
+            font-weight: 500;
         }
 
         /* Logs */
@@ -206,114 +242,94 @@
             max-height: 200px;
             overflow-y: auto;
             background-color: var(--bg-input);
-            border-radius: 8px;
-            padding: 10px;
+            border-radius: 10px;
+            padding: 12px;
         }
         .log-item {
-            padding: 8px 10px;
+            padding: 10px 12px;
             border-bottom: 1px solid var(--border-color);
-            font-size: 0.85em;
+            font-size: 0.8em;
         }
         .log-item:last-child {
             border-bottom: none;
         }
         .log-item .log-time {
-            color: var(--text-secondary);
-            font-size: 0.8em;
+            color: var(--text-muted);
+            font-size: 0.75em;
         }
         .log-item .log-text {
-            color: var(--text-primary);
+            color: var(--text-secondary);
+            margin-top: 2px;
         }
 
         /* Keys */
         .key-buttons {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            grid-template-columns: repeat(2, 1fr);
             gap: 10px;
             margin-bottom: 15px;
         }
         .key-btn {
-            padding: 15px;
+            padding: 16px 12px;
             background-color: var(--bg-input);
-            border: 1px solid var(--neon-primary);
-            border-radius: 10px;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
             color: var(--text-primary);
             cursor: pointer;
-            transition: all 0.3s;
+            transition: all 0.2s;
             text-align: center;
         }
         .key-btn:hover {
-            background-color: var(--neon-primary);
-            box-shadow: 0 0 15px var(--neon-glow);
-            transform: scale(1.02);
+            border-color: var(--red-primary);
+            background-color: rgba(220, 38, 38, 0.05);
+            transform: translateY(-1px);
         }
         .key-btn .key-days {
-            font-size: 1.2em;
-            font-weight: bold;
+            font-size: 1.1em;
+            font-weight: 600;
             display: block;
         }
         .key-btn .key-cost {
-            font-size: 0.8em;
-            color: var(--text-secondary);
-            margin-top: 5px;
-        }
-        .key-btn:hover .key-cost {
-            color: white;
+            font-size: 0.75em;
+            color: var(--text-muted);
+            margin-top: 4px;
         }
 
         .key-display {
             background-color: var(--bg-input);
-            border: 2px solid var(--neon-primary);
-            border-radius: 10px;
+            border: 1px solid var(--red-primary);
+            border-radius: 12px;
             padding: 20px;
             text-align: center;
             font-family: 'Courier New', monospace;
-            font-size: 1.4em;
-            color: var(--neon-light);
-            text-shadow: 0 0 5px var(--neon-glow);
-            box-shadow: 0 0 15px var(--neon-glow);
+            font-size: 1.3em;
+            color: var(--red-light);
             margin-top: 15px;
             display: none;
             word-break: break-all;
+            letter-spacing: 2px;
         }
         .key-display.show {
             display: block;
         }
 
-        /* Select */
-        select {
-            width: 100%;
-            padding: 10px 15px;
-            background-color: var(--bg-input);
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            color: var(--text-primary);
-            font-size: 1em;
-            margin-bottom: 10px;
-        }
-        select:focus {
-            outline: none;
-            border-color: var(--neon-primary);
-        }
-
         /* Créditos */
         .credits-display {
             text-align: center;
-            padding: 20px;
+            padding: 24px;
             background-color: var(--bg-input);
-            border-radius: 10px;
-            border: 1px solid var(--neon-primary);
-            margin-bottom: 20px;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
         }
         .credits-display .credits-amount {
-            font-size: 2.5em;
-            font-weight: bold;
-            color: var(--neon-primary);
-            text-shadow: 0 0 10px var(--neon-glow);
+            font-size: 2.8em;
+            font-weight: 700;
+            color: var(--red-primary);
         }
         .credits-display .credits-label {
-            color: var(--text-secondary);
-            margin-top: 5px;
+            color: var(--text-muted);
+            margin-top: 4px;
+            font-size: 0.85em;
         }
 
         /* Toolbar */
@@ -322,76 +338,77 @@
             justify-content: space-between;
             align-items: center;
             margin-bottom: 20px;
-            padding: 15px 20px;
+            padding: 14px 20px;
             background-color: var(--bg-card);
-            border-radius: 10px;
+            border-radius: 12px;
             border: 1px solid var(--border-color);
         }
         .toolbar .user-info {
-            color: var(--text-secondary);
+            color: var(--text-muted);
+            font-size: 0.85em;
         }
         .toolbar .user-info strong {
-            color: var(--neon-light);
+            color: var(--text-primary);
+            font-weight: 600;
         }
 
-        /* QR Code / PIX */
+        /* PIX */
         .pix-container {
             text-align: center;
             padding: 20px;
             background-color: var(--bg-input);
-            border-radius: 10px;
+            border-radius: 12px;
             border: 1px solid var(--border-color);
-            margin-bottom: 15px;
         }
         .pix-container img {
-            max-width: 200px;
-            border-radius: 8px;
-            margin-bottom: 10px;
+            max-width: 180px;
+            border-radius: 10px;
+            margin-bottom: 12px;
         }
         .pix-key {
             font-family: 'Courier New', monospace;
-            font-size: 1.1em;
-            color: var(--neon-light);
-            background-color: var(--bg-dark);
-            padding: 10px 15px;
+            font-size: 1em;
+            color: var(--text-primary);
+            background-color: var(--bg-primary);
+            padding: 10px 16px;
             border-radius: 8px;
-            border: 1px solid var(--neon-primary);
+            border: 1px solid var(--border-color);
             display: inline-block;
             margin-top: 10px;
             cursor: pointer;
-            transition: all 0.3s;
+            transition: all 0.2s;
         }
         .pix-key:hover {
-            box-shadow: 0 0 10px var(--neon-glow);
+            border-color: var(--red-primary);
         }
         .pix-info {
-            color: var(--text-secondary);
-            font-size: 0.85em;
-            margin-top: 10px;
+            color: var(--text-muted);
+            font-size: 0.8em;
+            margin-top: 8px;
         }
         .pix-min {
-            color: var(--neon-light);
-            font-weight: bold;
-            font-size: 0.95em;
+            color: var(--red-light);
+            font-weight: 600;
+            font-size: 0.9em;
             margin-top: 8px;
         }
 
-        /* Scrollbar personalizada */
+        /* Scrollbar */
         ::-webkit-scrollbar {
-            width: 6px;
+            width: 4px;
         }
         ::-webkit-scrollbar-track {
-            background: var(--bg-dark);
+            background: var(--bg-primary);
         }
         ::-webkit-scrollbar-thumb {
-            background: var(--neon-primary);
-            border-radius: 3px;
+            background: var(--border-color);
+            border-radius: 2px;
         }
 
         /* Responsividade */
         @media (max-width: 600px) {
             .header h1 {
-                font-size: 1.8em;
+                font-size: 2.2em;
             }
             .stats-grid {
                 grid-template-columns: 1fr;
@@ -409,15 +426,16 @@
 </head>
 <body>
 
-<div class="app-container">
+<div class="app-container" id="app-container">
 
     <!-- ========================================
          TELA DE LOGIN
     ======================================== -->
     <div id="screen-login" class="screen active">
         <div class="header">
-            <h1>DVR PROXY</h1>
-            <p>Sistema de Geração de Keys</p>
+            <h1>DVR</h1>
+            <div class="subtitle">LICENSE SYSTEM</div>
+            <p class="desc">Sistema de Gerenciamento de Licenças</p>
         </div>
         <div class="card">
             <h2>Login</h2>
@@ -429,7 +447,7 @@
                 <label>Senha</label>
                 <input type="password" id="login-pass" placeholder="Digite sua senha">
             </div>
-            <button class="btn btn-primary btn-block" id="btn-login">ENTRAR</button>
+            <button class="btn btn-primary btn-block" id="btn-login">Entrar</button>
             <div id="login-msg" class="msg"></div>
         </div>
     </div>
@@ -438,15 +456,15 @@
          PAINEL ADMIN
     ======================================== -->
     <div id="screen-admin" class="screen">
-        <div class="header">
-            <h1>DVR PROXY</h1>
-            <p>Painel Administrativo</p>
+        <div class="header" style="padding-top: 20px; margin-bottom: 20px;">
+            <h1>DVR</h1>
+            <div class="subtitle">PAINEL ADMIN</div>
         </div>
 
         <!-- Toolbar -->
         <div class="toolbar">
             <div class="user-info">Logado como: <strong>ADMIN</strong></div>
-            <button class="btn btn-logout" id="btn-logout-admin">SAIR</button>
+            <button class="btn btn-logout" id="btn-logout-admin">Sair</button>
         </div>
 
         <!-- Dashboard -->
@@ -455,15 +473,15 @@
             <div class="stats-grid">
                 <div class="stat-box">
                     <div class="stat-number" id="stat-users">0</div>
-                    <div class="stat-label">Usuários Cadastrados</div>
+                    <div class="stat-label">Usuários</div>
                 </div>
                 <div class="stat-box">
                     <div class="stat-number" id="stat-accounts">0</div>
-                    <div class="stat-label">Contas Criadas</div>
+                    <div class="stat-label">Contas</div>
                 </div>
                 <div class="stat-box">
                     <div class="stat-number" id="stat-keys">0</div>
-                    <div class="stat-label">Keys Geradas</div>
+                    <div class="stat-label">Keys</div>
                 </div>
             </div>
         </div>
@@ -472,8 +490,20 @@
         <div class="card">
             <h2>Logs de Atividade</h2>
             <div class="logs-container" id="admin-logs">
-                <p style="color: var(--text-secondary); text-align: center;">Nenhum log registrado.</p>
+                <p style="color: var(--text-muted); text-align: center; padding: 20px 0;">Nenhum log registrado.</p>
             </div>
+        </div>
+
+        <!-- Gerar Key Personalizada (Admin) -->
+        <div class="card">
+            <h2>Gerar Key Personalizada</h2>
+            <div class="form-group">
+                <label>Duração (ex: 30s, 5m, 2h, 1d, 7d, 1ano)</label>
+                <input type="text" id="admin-key-duration" placeholder="Ex: 1h, 3d, 7d, 30d, 1ano">
+            </div>
+            <button class="btn btn-primary btn-block" id="btn-admin-gen-key">GERAR KEY</button>
+            <div id="admin-key-msg" class="msg"></div>
+            <div class="key-display" id="admin-generated-key"></div>
         </div>
 
         <!-- Criar Usuário -->
@@ -489,15 +519,15 @@
             </div>
             <div class="form-group">
                 <label>Saldo Inicial (créditos)</label>
-                <input type="number" id="new-user-credits" min="0" value="0" placeholder="Quantidade de créditos iniciais">
+                <input type="number" id="new-user-credits" min="0" value="0" placeholder="0">
             </div>
-            <button class="btn btn-primary" id="btn-create-user">CRIAR USUÁRIO</button>
+            <button class="btn btn-primary btn-block" id="btn-create-user">Criar Usuário</button>
             <div id="create-user-msg" class="msg"></div>
         </div>
 
-        <!-- Adicionar Saldo a Usuário -->
+        <!-- Adicionar Saldo -->
         <div class="card">
-            <h2>Adicionar Saldo ao Usuário</h2>
+            <h2>Adicionar Saldo</h2>
             <div class="form-group">
                 <label>Usuário do Membro</label>
                 <input type="text" id="admin-balance-username" placeholder="Digite o usuário do membro">
@@ -507,10 +537,10 @@
                 <input type="password" id="admin-balance-password" placeholder="Digite a senha do membro">
             </div>
             <div class="form-group">
-                <label>Créditos a Adicionar (R$5 cada)</label>
-                <input type="number" id="admin-balance-amount" min="1" value="1" placeholder="Quantidade">
+                <label>Créditos a Adicionar (R$2 cada)</label>
+                <input type="number" id="admin-balance-amount" min="1" value="1" placeholder="1">
             </div>
-            <button class="btn btn-primary" id="btn-admin-add-balance">ADICIONAR SALDO</button>
+            <button class="btn btn-primary btn-block" id="btn-admin-add-balance">Adicionar Saldo</button>
             <div id="add-balance-msg" class="msg"></div>
         </div>
 
@@ -521,7 +551,7 @@
                 <label>Nome do Usuário a Excluir</label>
                 <input type="text" id="delete-username" placeholder="Digite o nome do usuário">
             </div>
-            <button class="btn btn-primary" id="btn-delete-user" style="background-color: #ff4444; box-shadow: 0 0 10px rgba(255,68,68,0.6);">EXCLUIR USUÁRIO</button>
+            <button class="btn btn-danger btn-block" id="btn-delete-user">Excluir Usuário</button>
             <div id="delete-user-msg" class="msg"></div>
         </div>
     </div>
@@ -530,15 +560,15 @@
          PAINEL DO USUÁRIO
     ======================================== -->
     <div id="screen-user" class="screen">
-        <div class="header">
-            <h1>DVR PROXY</h1>
-            <p>Painel do Usuário</p>
+        <div class="header" style="padding-top: 20px; margin-bottom: 20px;">
+            <h1>DVR</h1>
+            <div class="subtitle">PAINEL DO MEMBRO</div>
         </div>
 
         <!-- Toolbar -->
         <div class="toolbar">
             <div class="user-info">Logado como: <strong id="user-display-name"></strong></div>
-            <button class="btn btn-logout" id="btn-logout-user">SAIR</button>
+            <button class="btn btn-logout" id="btn-logout-user">Sair</button>
         </div>
 
         <!-- Créditos -->
@@ -546,7 +576,7 @@
             <h2>Meus Créditos</h2>
             <div class="credits-display">
                 <div class="credits-amount" id="user-credits">0</div>
-                <div class="credits-label">créditos disponíveis (R$5,00 cada)</div>
+                <div class="credits-label">créditos disponíveis (R$2,00 cada)</div>
             </div>
         </div>
 
@@ -554,802 +584,17 @@
         <div class="card">
             <h2>Comprar Saldo</h2>
             <div class="pix-container">
-                <p style="color: var(--text-primary); margin-bottom: 15px; font-size: 1.1em;">Selecione o valor e pague via PIX:</p>
+                <p style="color: var(--text-primary); margin-bottom: 15px; font-size: 0.95em;">Selecione o valor e pague via PIX:</p>
                 <div style="margin-bottom: 20px;">
-                    <label style="color: var(--text-secondary); font-size: 0.9em; display: block; margin-bottom: 8px;">Valor do PIX (mínimo R$5, aumenta de R$5 em R$5)</label>
                     <div style="display: flex; align-items: center; justify-content: center; gap: 15px;">
                         <button class="btn btn-primary" id="btn-pix-minus" style="padding: 10px 18px; font-size: 1.2em;">−</button>
-                        <span id="pix-value-display" style="font-size: 2em; font-weight: bold; color: var(--neon-primary); text-shadow: 0 0 10px var(--neon-glow); min-width: 120px; text-align: center;">R$ 5,00</span>
+                        <span id="pix-value-display" style="font-size: 2em; font-weight: 700; color: var(--red-primary); min-width: 120px; text-align: center;">R$ 4,00</span>
                         <button class="btn btn-primary" id="btn-pix-plus" style="padding: 10px 18px; font-size: 1.2em;">+</button>
                     </div>
-                    <p style="color: var(--text-secondary); font-size: 0.85em; margin-top: 8px;">Você receberá: <strong id="pix-credits-preview" style="color: var(--neon-light);">1 crédito</strong></p>
+                    <p style="color: var(--text-muted); font-size: 0.8em; margin-top: 8px;">Você receberá: <strong id="pix-credits-preview" style="color: var(--red-light);">2 créditos</strong></p>
                 </div>
-                <button class="btn btn-primary btn-block" id="btn-generate-pix" style="margin-bottom: 15px;">GERAR PIX</button>
+                <button class="btn btn-primary btn-block" id="btn-generate-pix" style="margin-bottom: 15px;">Gerar PIX</button>
                 <div id="pix-qr-area" style="display: none;">
-                    <img id="pix-qrcode" src="" alt="QR Code PIX" style="max-width: 200px; border-radius: 8px; margin-bottom: 10px;">
-                    <p style="color: var(--text-secondary); font-size: 0.85em; margin-bottom: 5px;">Escaneie o QR Code ou copie o código:</p>
-                    <span class="pix-key" id="pix-copy-code" title="Clique para copiar">Código PIX aparecerá aqui</span>
-                    <p class="pix-info">Clique no código para copiar</p>
-                    <p id="pix-status" style="color: var(--neon-light); font-weight: bold; margin-top: 15px;">⏳ Aguardando pagamento...</p>
-                </div>
-                <div id="pix-msg" class="msg"></div>
-            </div>
-        </div>
-
-        <!-- Gerar Keys -->
-        <div class="card">
-            <h2>Gerar Key</h2>
-            <div class="key-buttons">
-                <div class="key-btn" data-days="1">
-                    <span class="key-days">1 Dia</span>
-                    <span class="key-cost">1 Crédito (R$5)</span>
-                </div>
-                <div class="key-btn" data-days="3">
-                    <span class="key-days">3 Dias</span>
-                    <span class="key-cost">2 Créditos (R$10)</span>
-                </div>
-                <div class="key-btn" data-days="7">
-                    <span class="key-days">7 Dias</span>
-                    <span class="key-cost">4 Créditos (R$20)</span>
-                </div>
-                <div class="key-btn" data-days="30">
-                    <span class="key-days">30 Dias</span>
-                    <span class="key-cost">6 Créditos (R$30)</span>
-                </div>
-            </div>
-            <div id="keygen-msg" class="msg"></div>
-            <div class="key-display" id="generated-key"></div>
-        </div>
-    </div>
-
-</div>
-
-<script>
-/* ========================================
-   DVR PROXY - SISTEMA DE GERAÇÃO DE KEYS
-   Lógica JavaScript Completa
-======================================== */
-
-(function() {
-    'use strict';
-
-    // Configurações
-    var PIX_KEY = '+5598985625642';
-    var MAX_SESSIONS_PER_USER = 1; // Limite: 1 pessoa por conta
-
-    // ========================================
-    // MÓDULO DE DADOS (localStorage)
-    // ========================================
-    const DB = {
-        init: function() {
-            if (!localStorage.getItem('dvr_users')) {
-                // Senha do ADMIN: 47823091
-                localStorage.setItem('dvr_users', JSON.stringify([
-                    { username: 'ADMIN', password: '47823091', role: 'admin' }
-                ]));
-            } else {
-                // Garante que a senha do ADMIN esteja sempre atualizada
-                var users = JSON.parse(localStorage.getItem('dvr_users'));
-                var adminFound = false;
-                for (var i = 0; i < users.length; i++) {
-                    if (users[i].username === 'ADMIN' && users[i].role === 'admin') {
-                        users[i].password = '47823091';
-                        adminFound = true;
-                        break;
-                    }
-                }
-                if (!adminFound) {
-                    users.push({ username: 'ADMIN', password: '47823091', role: 'admin' });
-                }
-                localStorage.setItem('dvr_users', JSON.stringify(users));
-            }
-            if (!localStorage.getItem('dvr_accounts')) {
-                localStorage.setItem('dvr_accounts', JSON.stringify({}));
-            }
-            if (!localStorage.getItem('dvr_logs')) {
-                localStorage.setItem('dvr_logs', JSON.stringify([]));
-            }
-            if (!localStorage.getItem('dvr_keys_generated')) {
-                localStorage.setItem('dvr_keys_generated', JSON.stringify([]));
-            }
-            // Sessões ativas (controle de limite por conta)
-            if (!localStorage.getItem('dvr_sessions')) {
-                localStorage.setItem('dvr_sessions', JSON.stringify({}));
-            }
-        },
-
-        get: function(key) {
-            return JSON.parse(localStorage.getItem(key)) || null;
-        },
-        set: function(key, value) {
-            localStorage.setItem(key, JSON.stringify(value));
-        },
-
-        getUsers: function() { return this.get('dvr_users'); },
-        setUsers: function(users) { this.set('dvr_users', users); },
-
-        getAccounts: function() { return this.get('dvr_accounts'); },
-        setAccounts: function(accounts) { this.set('dvr_accounts', accounts); },
-
-        getLogs: function() { return this.get('dvr_logs'); },
-        addLog: function(type, user, description) {
-            var logs = this.getLogs();
-            logs.unshift({
-                type: type,
-                user: user,
-                description: description,
-                timestamp: new Date().toISOString()
-            });
-            this.set('dvr_logs', logs);
-        },
-
-        getKeysGenerated: function() { return this.get('dvr_keys_generated'); },
-        addKeyGenerated: function(user, key, days) {
-            var keys = this.getKeysGenerated();
-            keys.push({ user: user, key: key, days: days, timestamp: new Date().toISOString() });
-            this.set('dvr_keys_generated', keys);
-        },
-
-        // Sessões ativas
-        getSessions: function() { return this.get('dvr_sessions') || {}; },
-        setSessions: function(sessions) { this.set('dvr_sessions', sessions); }
-    };
-
-    // ========================================
-    // MÓDULO DE SESSÕES (limite 1 por conta)
-    // ========================================
-    const Sessions = {
-        // Gera um ID único para esta aba/sessão
-        getTabId: function() {
-            if (!sessionStorage.getItem('dvr_tab_id')) {
-                sessionStorage.setItem('dvr_tab_id', 'tab_' + Date.now() + '_' + Math.random().toString(36).substr(2, 6));
-            }
-            return sessionStorage.getItem('dvr_tab_id');
-        },
-
-        // Verifica se o usuário já está logado em outra sessão
-        isUserOnline: function(username) {
-            var sessions = DB.getSessions();
-            var tabId = this.getTabId();
-
-            if (sessions[username]) {
-                // Verifica se a sessão ainda é válida (expira em 30 segundos sem heartbeat)
-                var lastSeen = sessions[username].lastSeen;
-                var now = Date.now();
-                var elapsed = now - lastSeen;
-
-                // Se a sessão é desta mesma aba, permite
-                if (sessions[username].tabId === tabId) {
-                    return false;
-                }
-
-                // Se a última atividade foi há menos de 30 segundos, está online
-                if (elapsed < 30000) {
-                    return true;
-                }
-            }
-            return false;
-        },
-
-        // Registra sessão ativa
-        registerSession: function(username) {
-            var sessions = DB.getSessions();
-            sessions[username] = {
-                tabId: this.getTabId(),
-                lastSeen: Date.now()
-            };
-            DB.setSessions(sessions);
-        },
-
-        // Atualiza heartbeat (mantém sessão ativa)
-        heartbeat: function(username) {
-            var sessions = DB.getSessions();
-            if (sessions[username] && sessions[username].tabId === this.getTabId()) {
-                sessions[username].lastSeen = Date.now();
-                DB.setSessions(sessions);
-            }
-        },
-
-        // Remove sessão ao sair
-        removeSession: function(username) {
-            var sessions = DB.getSessions();
-            if (sessions[username] && sessions[username].tabId === this.getTabId()) {
-                delete sessions[username];
-                DB.setSessions(sessions);
-            }
-        }
-    };
-
-    // ========================================
-    // MÓDULO DE AUTENTICAÇÃO
-    // ========================================
-    const Auth = {
-        currentUser: null,
-        heartbeatInterval: null,
-
-        login: function(username, password) {
-            var users = DB.getUsers();
-            var foundUser = null;
-
-            for (var i = 0; i < users.length; i++) {
-                if (users[i].username === username && users[i].password === password) {
-                    foundUser = users[i];
-                    break;
-                }
-            }
-
-            // Usuário ou senha errada
-            if (!foundUser) {
-                return { success: false, message: 'Usuário ou senha errada' };
-            }
-
-            // Verifica se já tem alguém usando esta conta (limite de 1 pessoa)
-            // Admin não tem limitação de sessão
-            if (foundUser.role !== 'admin' && Sessions.isUserOnline(username)) {
-                return { success: false, message: 'Esta conta já está em uso por outra pessoa. Limite: 1 pessoa por conta.' };
-            }
-
-            // Login bem-sucedido
-            this.currentUser = foundUser;
-            sessionStorage.setItem('dvr_session', JSON.stringify(foundUser));
-
-            // Registra sessão ativa
-            Sessions.registerSession(username);
-
-            // Inicia heartbeat (atualiza a cada 10 segundos)
-            this.startHeartbeat(username);
-
-            return { success: true, user: foundUser };
-        },
-
-        logout: function() {
-            if (this.currentUser) {
-                Sessions.removeSession(this.currentUser.username);
-            }
-            this.currentUser = null;
-            sessionStorage.removeItem('dvr_session');
-            this.stopHeartbeat();
-        },
-
-        getSession: function() {
-            if (this.currentUser) return this.currentUser;
-            var session = sessionStorage.getItem('dvr_session');
-            if (session) {
-                this.currentUser = JSON.parse(session);
-                // Restaura heartbeat
-                Sessions.registerSession(this.currentUser.username);
-                this.startHeartbeat(this.currentUser.username);
-                return this.currentUser;
-            }
-            return null;
-        },
-
-        startHeartbeat: function(username) {
-            this.stopHeartbeat();
-            this.heartbeatInterval = setInterval(function() {
-                Sessions.heartbeat(username);
-            }, 10000);
-        },
-
-        stopHeartbeat: function() {
-            if (this.heartbeatInterval) {
-                clearInterval(this.heartbeatInterval);
-                this.heartbeatInterval = null;
-            }
-        },
-
-        // Cria usuário com saldo inicial - bloqueia se usuário E senha já existem
-        createUser: function(username, password, initialCredits) {
-            var users = DB.getUsers();
-
-            // Verifica se já existe um usuário com o mesmo nome OU mesma combinação user+senha
-            for (var i = 0; i < users.length; i++) {
-                if (users[i].username.toLowerCase() === username.toLowerCase()) {
-                    return { success: false, message: 'Usuário e senha já existente' };
-                }
-                if (users[i].username.toLowerCase() === username.toLowerCase() && users[i].password === password) {
-                    return { success: false, message: 'Usuário e senha já existente' };
-                }
-            }
-
-            users.push({ username: username, password: password, role: 'user' });
-            DB.setUsers(users);
-
-            var accounts = DB.getAccounts();
-            accounts[username] = { credits: initialCredits || 0, keys: [] };
-            DB.setAccounts(accounts);
-
-            var msg = 'Criou o usuário: ' + username;
-            if (initialCredits > 0) {
-                msg += ' (saldo inicial: ' + initialCredits + ' créditos)';
-            }
-            DB.addLog('user_created', 'ADMIN', msg);
-
-            return { success: true, message: 'Usuário criado com sucesso!' + (initialCredits > 0 ? ' Saldo inicial: ' + initialCredits + ' créditos.' : '') };
-        },
-
-        // Exclui um usuário (somente membros, não admin)
-        deleteUser: function(username) {
-            var users = DB.getUsers();
-            var userIndex = -1;
-
-            for (var i = 0; i < users.length; i++) {
-                if (users[i].username.toLowerCase() === username.toLowerCase() && users[i].role === 'user') {
-                    userIndex = i;
-                    break;
-                }
-            }
-
-            if (userIndex === -1) {
-                return { success: false, message: 'Usuário não encontrado!' };
-            }
-
-            // Remove o usuário da lista
-            var removedUser = users[userIndex].username;
-            users.splice(userIndex, 1);
-            DB.setUsers(users);
-
-            // Remove a conta (créditos e keys)
-            var accounts = DB.getAccounts();
-            delete accounts[removedUser];
-            DB.setAccounts(accounts);
-
-            // Remove sessão ativa se existir
-            var sessions = DB.getSessions();
-            if (sessions[removedUser]) {
-                delete sessions[removedUser];
-                DB.setSessions(sessions);
-            }
-
-            DB.addLog('user_deleted', 'ADMIN', 'Excluiu o usuário: ' + removedUser);
-
-            return { success: true, message: 'Usuário "' + removedUser + '" excluído com sucesso!' };
-        },
-
-        // Verifica credenciais de um membro
-        verifyUser: function(username, password) {
-            var users = DB.getUsers();
-            for (var i = 0; i < users.length; i++) {
-                if (users[i].username === username && users[i].password === password && users[i].role === 'user') {
-                    return true;
-                }
-            }
-            return false;
-        }
-    };
-
-    // ========================================
-    // MÓDULO DE KEYS
-    // ========================================
-    const KeyGen = {
-        costs: { 1: 1, 3: 2, 7: 4, 30: 6 },
-
-        generateRandomKey: function() {
-            var chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-            var segments = [];
-            for (var s = 0; s < 3; s++) {
-                var segment = '';
-                for (var i = 0; i < 4; i++) {
-                    segment += chars.charAt(Math.floor(Math.random() * chars.length));
-                }
-                segments.push(segment);
-            }
-            return 'DVR-' + segments.join('-');
-        },
-
-        generate: function(username, days) {
-            var cost = this.costs[days];
-            if (!cost) return { success: false, message: 'Duração inválida.' };
-
-            var accounts = DB.getAccounts();
-            if (!accounts[username]) return { success: false, message: 'Conta não encontrada.' };
-
-            if (accounts[username].credits < cost) {
-                return { success: false, message: 'Créditos insuficientes! Você precisa de ' + cost + ' crédito(s).' };
-            }
-
-            accounts[username].credits -= cost;
-            var newKey = this.generateRandomKey();
-            accounts[username].keys.push({ key: newKey, days: days, date: new Date().toISOString() });
-            DB.setAccounts(accounts);
-
-            DB.addKeyGenerated(username, newKey, days);
-            DB.addLog('key_generated', username, 'Gerou key de ' + days + ' dia(s): ' + newKey);
-
-            return { success: true, key: newKey, message: 'Key gerada com sucesso!' };
-        }
-    };
-
-    // ========================================
-    // MÓDULO DE CRÉDITOS
-    // ========================================
-    const Credits = {
-        getBalance: function(username) {
-            var accounts = DB.getAccounts();
-            return accounts[username] ? accounts[username].credits : 0;
-        },
-
-        // Adiciona créditos automaticamente após confirmação de pagamento (Mercado Pago)
-        addCreditsAuto: function(username, amount) {
-            if (amount <= 0) return { success: false, message: 'Quantidade inválida.' };
-
-            var accounts = DB.getAccounts();
-            if (!accounts[username]) return { success: false, message: 'Conta não encontrada.' };
-
-            accounts[username].credits += amount;
-            DB.setAccounts(accounts);
-
-            var totalReais = amount * 5;
-            DB.addLog('pix_confirmed', username, 'Pagamento PIX confirmado: R$' + totalReais.toFixed(2) + ' (+' + amount + ' créditos)');
-
-            return { success: true, message: 'Pagamento confirmado! +' + amount + ' créditos adicionados.' };
-        },
-
-        // Admin adiciona saldo validando usuário e senha do membro
-        addBalanceByAdmin: function(username, password, amount) {
-            if (amount <= 0) return { success: false, message: 'Quantidade inválida.' };
-
-            if (!Auth.verifyUser(username, password)) {
-                return { success: false, message: 'Usuário ou senha errada' };
-            }
-
-            var accounts = DB.getAccounts();
-            if (!accounts[username]) return { success: false, message: 'Conta não encontrada.' };
-
-            accounts[username].credits += amount;
-            DB.setAccounts(accounts);
-
-            var totalReais = amount * 5;
-            DB.addLog('credit_added', 'ADMIN', 'Adicionou ' + amount + ' crédito(s) (R$' + totalReais.toFixed(2) + ') ao usuário: ' + username);
-
-            return { success: true, message: 'Saldo adicionado! +' + amount + ' créditos (R$' + totalReais.toFixed(2) + ') para ' + username };
-        }
-    };
-
-    // ========================================
-    // MÓDULO DE INTERFACE (UI)
-    // ========================================
-    const UI = {
-        showScreen: function(screenId) {
-            var screens = document.querySelectorAll('.screen');
-            for (var i = 0; i < screens.length; i++) {
-                screens[i].classList.remove('active');
-            }
-            document.getElementById(screenId).classList.add('active');
-        },
-
-        showMsg: function(elementId, text, type) {
-            var el = document.getElementById(elementId);
-            el.textContent = text;
-            el.className = 'msg show ' + (type === 'success' ? 'msg-success' : 'msg-error');
-            setTimeout(function() {
-                el.classList.remove('show');
-            }, 5000);
-        },
-
-        formatDate: function(isoString) {
-            var d = new Date(isoString);
-            return d.toLocaleDateString('pt-BR') + ' ' + d.toLocaleTimeString('pt-BR', {hour: '2-digit', minute: '2-digit'});
-        }
-    };
-
-    // ========================================
-    // CONTROLADORES DE TELA
-    // ========================================
-
-    // --- LOGIN ---
-    function setupLogin() {
-        var btnLogin = document.getElementById('btn-login');
-        var inputUser = document.getElementById('login-user');
-        var inputPass = document.getElementById('login-pass');
-
-        btnLogin.addEventListener('click', function() {
-            var username = inputUser.value.trim();
-            var password = inputPass.value.trim();
-
-            if (!username || !password) {
-                UI.showMsg('login-msg', 'Preencha todos os campos!', 'error');
-                return;
-            }
-
-            var result = Auth.login(username, password);
-            if (result.success) {
-                if (result.user.role === 'admin') {
-                    UI.showScreen('screen-admin');
-                    refreshAdminPanel();
-                } else {
-                    UI.showScreen('screen-user');
-                    refreshUserPanel();
-                }
-                inputUser.value = '';
-                inputPass.value = '';
-            } else {
-                UI.showMsg('login-msg', result.message, 'error');
-            }
-        });
-
-        inputPass.addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') btnLogin.click();
-        });
-        inputUser.addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') btnLogin.click();
-        });
-    }
-
-    // --- ADMIN ---
-    function setupAdmin() {
-        // Logout
-        document.getElementById('btn-logout-admin').addEventListener('click', function() {
-            Auth.logout();
-            UI.showScreen('screen-login');
-        });
-
-        // Criar usuário com saldo inicial
-        document.getElementById('btn-create-user').addEventListener('click', function() {
-            var username = document.getElementById('new-user').value.trim();
-            var password = document.getElementById('new-pass').value.trim();
-            var initialCredits = parseInt(document.getElementById('new-user-credits').value) || 0;
-
-            if (!username || !password) {
-                UI.showMsg('create-user-msg', 'Preencha usuário e senha!', 'error');
-                return;
-            }
-
-            var result = Auth.createUser(username, password, initialCredits);
-            UI.showMsg('create-user-msg', result.message, result.success ? 'success' : 'error');
-
-            if (result.success) {
-                document.getElementById('new-user').value = '';
-                document.getElementById('new-pass').value = '';
-                document.getElementById('new-user-credits').value = '0';
-                refreshAdminPanel();
-            }
-        });
-
-        // Adicionar saldo via usuário e senha do membro
-        document.getElementById('btn-admin-add-balance').addEventListener('click', function() {
-            var username = document.getElementById('admin-balance-username').value.trim();
-            var password = document.getElementById('admin-balance-password').value.trim();
-            var amount = parseInt(document.getElementById('admin-balance-amount').value);
-
-            if (!username || !password) {
-                UI.showMsg('add-balance-msg', 'Preencha usuário e senha do membro!', 'error');
-                return;
-            }
-            if (!amount || amount <= 0) {
-                UI.showMsg('add-balance-msg', 'Digite uma quantidade válida!', 'error');
-                return;
-            }
-
-            var result = Credits.addBalanceByAdmin(username, password, amount);
-            UI.showMsg('add-balance-msg', result.message, result.success ? 'success' : 'error');
-
-            if (result.success) {
-                document.getElementById('admin-balance-username').value = '';
-                document.getElementById('admin-balance-password').value = '';
-                document.getElementById('admin-balance-amount').value = '1';
-                refreshAdminPanel();
-            }
-        });
-
-        // Excluir usuário
-        document.getElementById('btn-delete-user').addEventListener('click', function() {
-            var username = document.getElementById('delete-username').value.trim();
-
-            if (!username) {
-                UI.showMsg('delete-user-msg', 'Digite o nome do usuário!', 'error');
-                return;
-            }
-
-            if (username.toUpperCase() === 'ADMIN') {
-                UI.showMsg('delete-user-msg', 'Não é possível excluir a conta ADMIN!', 'error');
-                return;
-            }
-
-            var result = Auth.deleteUser(username);
-            UI.showMsg('delete-user-msg', result.message, result.success ? 'success' : 'error');
-
-            if (result.success) {
-                document.getElementById('delete-username').value = '';
-                refreshAdminPanel();
-            }
-        });
-    }
-
-    function refreshAdminPanel() {
-        var users = DB.getUsers();
-        var accounts = DB.getAccounts();
-        var logs = DB.getLogs();
-        var keysGenerated = DB.getKeysGenerated();
-
-        // Stats
-        var normalUsers = users.filter(function(u) { return u.role === 'user'; });
-        document.getElementById('stat-users').textContent = normalUsers.length;
-        document.getElementById('stat-accounts').textContent = Object.keys(accounts).length;
-        document.getElementById('stat-keys').textContent = keysGenerated.length;
-
-        // Logs
-        var logsContainer = document.getElementById('admin-logs');
-        if (logs.length === 0) {
-            logsContainer.innerHTML = '<p style="color: var(--text-secondary); text-align: center;">Nenhum log registrado.</p>';
-        } else {
-            var html = '';
-            for (var i = 0; i < Math.min(logs.length, 50); i++) {
-                html += '<div class="log-item">';
-                html += '<div class="log-time">' + UI.formatDate(logs[i].timestamp) + '</div>';
-                html += '<div class="log-text"><strong>[' + logs[i].user + ']</strong> ' + logs[i].description + '</div>';
-                html += '</div>';
-            }
-            logsContainer.innerHTML = html;
-        }
-    }
-
-    // --- USUÁRIO ---
-    var pixValue = 5; // Valor inicial do PIX em reais
-
-    function updatePixDisplay() {
-        document.getElementById('pix-value-display').textContent = 'R$ ' + pixValue.toFixed(2).replace('.', ',');
-        var credits = pixValue / 5;
-        document.getElementById('pix-credits-preview').textContent = credits + (credits === 1 ? ' crédito' : ' créditos');
-    }
-
-    function setupUser() {
-        // Logout
-        document.getElementById('btn-logout-user').addEventListener('click', function() {
-            Auth.logout();
-            UI.showScreen('screen-login');
-        });
-
-        // Controle de valor do PIX (- e +)
-        document.getElementById('btn-pix-minus').addEventListener('click', function() {
-            if (pixValue > 5) {
-                pixValue -= 5;
-                updatePixDisplay();
-            }
-        });
-
-        document.getElementById('btn-pix-plus').addEventListener('click', function() {
-            pixValue += 5;
-            updatePixDisplay();
-        });
-
-        // Gerar PIX (aqui você integra a API do Mercado Pago)
-        document.getElementById('btn-generate-pix').addEventListener('click', function() {
-            var user = Auth.getSession();
-            var credits = pixValue / 5;
-
-            // ============================================================
-            // INTEGRAÇÃO MERCADO PAGO - SUBSTITUA ESTE BLOCO
-            // Aqui você faz a chamada para sua API/backend que cria o
-            // pagamento no Mercado Pago e retorna o QR Code e o código copia-e-cola.
-            //
-            // Exemplo de dados que você vai receber da API:
-            // - qr_code_base64: imagem do QR Code
-            // - qr_code: código copia-e-cola do PIX
-            // - payment_id: ID do pagamento para verificar status
-            //
-            // Após confirmação do pagamento, chame:
-            // Credits.addCreditsAuto(user.username, credits);
-            // refreshUserPanel();
-            // ============================================================
-
-            // Simulação visual (remova quando integrar a API real)
-            var qrArea = document.getElementById('pix-qr-area');
-            qrArea.style.display = 'block';
-
-            // QR Code com a chave PIX real
-            var qrImg = document.getElementById('pix-qrcode');
-            qrImg.src = 'https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=' + encodeURIComponent(PIX_KEY);
-
-            var pixCopyCode = document.getElementById('pix-copy-code');
-            pixCopyCode.textContent = PIX_KEY;
-
-            document.getElementById('pix-status').textContent = '⏳ Aguardando pagamento de R$ ' + pixValue.toFixed(2).replace('.', ',') + ' (' + credits + ' créditos)...';
-
-            UI.showMsg('pix-msg', 'PIX gerado! Escaneie o QR Code ou copie o código para pagar.', 'success');
-
-            // ============================================================
-            // POLLING DE STATUS (substitua pela sua lógica real)
-            // Quando o pagamento for confirmado pela API do Mercado Pago:
-            //
-            // Credits.addCreditsAuto(user.username, credits);
-            // document.getElementById('pix-status').textContent = '✅ Pagamento confirmado! Créditos adicionados.';
-            // document.getElementById('pix-status').style.color = 'var(--success)';
-            // refreshUserPanel();
-            // ============================================================
-        });
-
-        // Copiar código PIX ao clicar
-        document.getElementById('pix-copy-code').addEventListener('click', function() {
-            var code = this.textContent;
-            if (navigator.clipboard) {
-                navigator.clipboard.writeText(code).then(function() {
-                    alert('Código PIX copiado!');
-                });
-            } else {
-                var textarea = document.createElement('textarea');
-                textarea.value = code;
-                document.body.appendChild(textarea);
-                textarea.select();
-                document.execCommand('copy');
-                document.body.removeChild(textarea);
-                alert('Código PIX copiado!');
-            }
-        });
-
-        // Gerar keys
-        var keyBtns = document.querySelectorAll('.key-btn');
-        for (var i = 0; i < keyBtns.length; i++) {
-            keyBtns[i].addEventListener('click', function() {
-                var days = parseInt(this.getAttribute('data-days'));
-                var user = Auth.getSession();
-                var result = KeyGen.generate(user.username, days);
-
-                if (result.success) {
-                    UI.showMsg('keygen-msg', result.message, 'success');
-                    var keyDisplay = document.getElementById('generated-key');
-                    keyDisplay.textContent = result.key;
-                    keyDisplay.classList.add('show');
-                    refreshUserPanel();
-                } else {
-                    UI.showMsg('keygen-msg', result.message, 'error');
-                    document.getElementById('generated-key').classList.remove('show');
-                }
-            });
-        }
-    }
-
-    function refreshUserPanel() {
-        var user = Auth.getSession();
-        if (!user) return;
-
-        document.getElementById('user-display-name').textContent = user.username;
-        document.getElementById('user-credits').textContent = Credits.getBalance(user.username);
-
-        // Gera QR Code via API pública
-        var qrImg = document.getElementById('pix-qrcode');
-        var qrData = encodeURIComponent(PIX_KEY);
-        qrImg.src = 'https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=' + qrData;
-    }
-
-    // ========================================
-    // INICIALIZAÇÃO
-    // ========================================
-    function init() {
-        DB.init();
-        setupLogin();
-        setupAdmin();
-        setupUser();
-
-        // Verifica sessão existente
-        var session = Auth.getSession();
-        if (session) {
-            if (session.role === 'admin') {
-                UI.showScreen('screen-admin');
-                refreshAdminPanel();
-            } else {
-                UI.showScreen('screen-user');
-                refreshUserPanel();
-            }
-        }
-
-        // Limpa sessão ao fechar a aba/janela
-        window.addEventListener('beforeunload', function() {
-            var session = Auth.getSession();
-            if (session) {
-                Sessions.removeSession(session.username);
-            }
-        });
-    }
-
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', init);
-    } else {
-        init();
-    }
-
-})();
-</script>
-
-</body>
-</html>
+                    <img id="pix-qrcode" src="" alt="QR Code PIX">
+                    <p style="color: var(--text-muted); font-size: 0.8em; margin-bottom: 5px;">Escaneie o QR Code ou copie o código:</p>
+                    <span class="pix-key" id="pix-copy-code" title="Clique para copiar">Código PIX</span
